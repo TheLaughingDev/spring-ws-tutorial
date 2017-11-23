@@ -1,7 +1,7 @@
 package org.thelaughingdev.soap.server.webservice
 
-import io.spring.guides.gs_producing_web_service.GetCountryRequest
-import io.spring.guides.gs_producing_web_service.GetCountryResponse
+import org.thelaughingdev.wsdl.GetCountryRequest
+import org.thelaughingdev.wsdl.GetCountryResponse
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.ws.server.endpoint.annotation.Endpoint
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot
@@ -13,7 +13,7 @@ import org.thelaughingdev.soap.server.repository.CountryRepository
 open class CountryEndpoint @Autowired constructor(private val countryRepository: CountryRepository) {
 
 	companion object {
-		const val NAMESPACE_URI = "http://spring.io/guides/gs-producing-web-service"
+		const val NAMESPACE_URI = "http://thelaughingdev.org/web-services"
 	}
 
 	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "getCountryRequest")

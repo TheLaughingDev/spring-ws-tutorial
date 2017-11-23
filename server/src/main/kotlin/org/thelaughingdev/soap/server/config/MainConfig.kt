@@ -33,7 +33,7 @@ open class MainConfig: WsConfigurerAdapter() {
 		return DefaultWsdl11Definition().apply {
 			setPortTypeName("CountriesPort")
 			setLocationUri("/ws")
-			setTargetNamespace("http://spring.io/guides/gs-producing-web-service")
+			setTargetNamespace("http://thelaughingdev.org/web-services")
 			setSchema(schema)
 		}
 	}

@@ -1,4 +1,4 @@
-group 'org.laughingman.soap'
+group 'org.thelaughingdev.soap'
 version '1.0-SNAPSHOT'
 
 configurations {
@@ -25,7 +25,7 @@ task genJaxb {
 				classpath: configurations.jaxb.asPath
 			mkdir(dir: sourcesDir)
 
-			xjc(destdir: sourcesDir, schema: schema) {
+			xjc(destdir: sourcesDir, schema: schema, package: "org.thelaughingdev.wsdl") {
 				arg(value: "-wsdl")
 				produces(dir: sourcesDir, includes: "**/*.java")
 			}
@@ -43,6 +43,3 @@ dependencies {
 	jaxb("org.glassfish.jaxb:jaxb-xjc:2.2.11")
 	compile(files(genJaxb.classesDir).builtBy(genJaxb))
 }
-
-
-

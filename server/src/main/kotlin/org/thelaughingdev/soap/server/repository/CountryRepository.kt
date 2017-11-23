@@ -1,7 +1,7 @@
 package org.thelaughingdev.soap.server.repository
 
-import io.spring.guides.gs_producing_web_service.Country
-import io.spring.guides.gs_producing_web_service.Currency
+import org.thelaughingdev.wsdl.Country
+import org.thelaughingdev.wsdl.Currency
 import org.springframework.stereotype.Repository
 
 @Repository

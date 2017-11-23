@@ -11,7 +11,7 @@ buildscript {
 	}
 }
 
-group 'org.laughingman.soap'
+group 'org.thelaughingdev.soap'
 version '1.0-SNAPSHOT'
 
 subprojects {
