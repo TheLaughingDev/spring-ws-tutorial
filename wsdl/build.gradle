@@ -1,0 +1,48 @@
+group 'org.laughingman.soap'
+version '1.0-SNAPSHOT'
+
+configurations {
+	jaxb
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+bootRepackage.enabled = false
+
+jar {
+	from "${buildDir}/classes/jaxb"
+}
+
+task genJaxb {
+	ext.sourcesDir = "${buildDir}/generated-sources/jaxb"
+	ext.classesDir = "${buildDir}/classes/jaxb"
+	ext.schema = "../server/src/main/resources/countries.xsd"
+
+	doLast() {
+		project.ant {
+			taskdef name: "xjc", classname: "com.sun.tools.xjc.XJCTask",
+				classpath: configurations.jaxb.asPath
+			mkdir(dir: sourcesDir)
+
+			xjc(destdir: sourcesDir, schema: schema) {
+				arg(value: "-wsdl")
+				produces(dir: sourcesDir, includes: "**/*.java")
+			}
+		}
+	}
+}
+
+compileJava {
+	dependsOn genJaxb
+	source genJaxb.sourcesDir
+	destinationDir new File("${buildDir}/classes/jaxb")
+}
+
+dependencies {
+	jaxb("org.glassfish.jaxb:jaxb-xjc:2.2.11")
+	compile(files(genJaxb.classesDir).builtBy(genJaxb))
+}
+
+
+
