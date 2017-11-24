@@ -1,13 +1,14 @@
 package org.thelaughingdev.soap.server.webservice
 
-import org.thelaughingdev.wsdl.GetCountryRequest
-import org.thelaughingdev.wsdl.GetCountryResponse
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.ws.server.endpoint.annotation.Endpoint
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot
 import org.springframework.ws.server.endpoint.annotation.RequestPayload
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload
 import org.thelaughingdev.soap.server.repository.CountryRepository
+import org.thelaughingdev.wsdl.GetCountryRequest
+import org.thelaughingdev.wsdl.GetCountryResponse
+import org.thelaughingdev.wsdl.Country as WsdlCountry
 
 @Endpoint
 open class CountryEndpoint @Autowired constructor(private val countryRepository: CountryRepository) {
@@ -19,9 +20,16 @@ open class CountryEndpoint @Autowired constructor(private val countryRepository:
 	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "getCountryRequest")
 	@ResponsePayload
 	fun getCountry(@RequestPayload request: GetCountryRequest): GetCountryResponse {
-		val response = GetCountryResponse().apply {
-			country = countryRepository.findCountry(request.name)
+		val response = GetCountryResponse()
+		countryRepository.findFirstByName(request.name)?.also {c ->
+			response.country = WsdlCountry().apply {
+				name = c.name
+				population = c.population
+				capital = c.capital
+				currency = c.currency
+			}
 		}
+
 		return response
 	}
 }
