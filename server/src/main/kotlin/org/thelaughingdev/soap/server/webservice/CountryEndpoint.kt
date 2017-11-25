@@ -22,12 +22,7 @@ open class CountryEndpoint @Autowired constructor(private val countryRepository:
 	fun getCountry(@RequestPayload request: GetCountryRequest): GetCountryResponse {
 		val response = GetCountryResponse()
 		countryRepository.findFirstByName(request.name)?.also {c ->
-			response.country = WsdlCountry().apply {
-				name = c.name
-				population = c.population
-				capital = c.capital
-				currency = c.currency
-			}
+			response.country = c.toDto()
 		}
 
 		return response
