@@ -4,10 +4,10 @@ import org.thelaughingdev.wsdl.Currency
 import javax.persistence.*
 
 @Entity
-data class Country (
+data class Country(
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	var id: Long = 0,
+	var id: Long? = null,
 
 	@Column(unique = true, nullable = false)
 	var name: String = "",
