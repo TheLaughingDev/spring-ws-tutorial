@@ -8,7 +8,7 @@ configurations {
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-bootRepackage.enabled = false
+//bootRepackage.enabled = false
 
 jar {
 	from "${buildDir}/classes/jaxb"

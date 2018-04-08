@@ -3,10 +3,10 @@ version '1.0-SNAPSHOT'
 
 dependencies {
 	compile("org.springframework.boot:spring-boot-starter-web-services")
-	compile("org.springframework.ws:spring-ws-core:3.0.0.RELEASE")
-	compile group: 'wsdl4j', name: 'wsdl4j', version: '1.6.3'
-	compile group: 'com.sun.xml.messaging.saaj', name: 'saaj-impl', version: '1.4.0'
-
-
+	compile("org.springframework.boot:spring-boot-starter-data-jpa")
+	compile("wsdl4j:wsdl4j:1.6.3")
+	compile("com.sun.xml.messaging.saaj:saaj-impl:1.4.0")
 	compile project(':wsdl')
+
+	runtime("org.hsqldb:hsqldb:2.4.0")
 }

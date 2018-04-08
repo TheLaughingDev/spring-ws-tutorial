@@ -11,13 +11,14 @@ import org.springframework.ws.transport.http.MessageDispatcherServlet
 import org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition
 import org.springframework.xml.xsd.SimpleXsdSchema
 import org.springframework.xml.xsd.XsdSchema
+import javax.servlet.Servlet
 
 @EnableWs
 @Configuration
 open class MainConfig: WsConfigurerAdapter() {
 
 	@Bean
-	open fun messageDispatchServlet(context: ApplicationContext): ServletRegistrationBean {
+	open fun messageDispatchServlet(context: ApplicationContext): ServletRegistrationBean<Servlet> {
 		val servlet = MessageDispatcherServlet().apply {
 			setApplicationContext(context)
 			isTransformWsdlLocations = true
