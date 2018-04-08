@@ -5,5 +5,8 @@ dependencies {
 	compile("org.springframework.boot:spring-boot-starter-web-services")
 	compile("org.springframework.ws:spring-ws-core:3.0.0.RELEASE")
 	compile group: 'wsdl4j', name: 'wsdl4j', version: '1.6.3'
+	compile group: 'com.sun.xml.messaging.saaj', name: 'saaj-impl', version: '1.4.0'
+
+
 	compile project(':wsdl')
 }
