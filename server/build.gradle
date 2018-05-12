@@ -4,9 +4,12 @@ version '1.0-SNAPSHOT'
 dependencies {
 	compile("org.springframework.boot:spring-boot-starter-web-services")
 	compile("org.springframework.boot:spring-boot-starter-data-jpa")
-	compile("wsdl4j:wsdl4j:1.6.3")
 	compile("com.sun.xml.messaging.saaj:saaj-impl:1.4.0")
+	compile("wsdl4j:wsdl4j:1.6.3")
 	compile project(':wsdl')
 
 	runtime("org.hsqldb:hsqldb:2.4.0")
+	runtime('com.sun.xml.bind:jaxb-xjc:2.2.7-b41')
+	runtime('com.sun.xml.bind:jaxb-impl:2.2.7-b41')
+	runtime('javax.xml.bind:jaxb-api:2.2.7')
 }

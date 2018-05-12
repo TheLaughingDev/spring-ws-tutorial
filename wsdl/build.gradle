@@ -1,49 +1,28 @@
+plugins {
+	id 'com.github.jacobono.jaxb' version '1.3.5'
+}
+
 group 'org.thelaughingdev.soap'
 version '1.0-SNAPSHOT'
-
-configurations {
-	jaxb
-}
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-//bootRepackage.enabled = false
-
-jar {
-	from "${buildDir}/classes/jaxb"
-}
-
-task genJaxb {
-	ext.sourcesDir = "${buildDir}/generated-sources/jaxb"
-	ext.classesDir = "${buildDir}/classes/jaxb"
-	ext.schema = "../server/src/main/resources/countries.xsd"
-
-	doLast() {
-		project.ant {
-			taskdef name: "xjc", classname: "com.sun.tools.xjc.XJCTask",
-				classpath: configurations.jaxb.asPath
-			mkdir(dir: sourcesDir)
-
-			xjc(destdir: sourcesDir, schema: schema, package: "org.thelaughingdev.wsdl") {
-				arg(value: "-wsdl")
-				produces(dir: sourcesDir, includes: "**/*.java")
-			}
-		}
+jaxb {
+	xsdDir = "server/src/main/resources"
+	episodesDir = "wsdl/schema/episodes"
+	xjc {
+		generatePackage = "org.thelaughingdev.wsdl"
 	}
 }
 
-compileJava {
-	dependsOn genJaxb
-	source genJaxb.sourcesDir
-	destinationDir new File("${buildDir}/classes/jaxb")
+clean.doFirst {
+	delete "$rootDir/wsdl/src/main/java/org"
 }
 
 dependencies {
-	compile group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.0'
-	compile group: 'org.glassfish.jaxb', name: 'jaxb-core', version: '2.3.0'
-	compile group: 'com.sun.xml.bind', name: 'jaxb-impl', version: '2.3.0'
-
-	jaxb("org.glassfish.jaxb:jaxb-xjc:2.3.0")
-	compile(files(genJaxb.classesDir).builtBy(genJaxb))
+	jaxb 'com.sun.xml.bind:jaxb-xjc:2.2.7-b41'
+	jaxb 'com.sun.xml.bind:jaxb-impl:2.2.7-b41'
+	jaxb 'javax.xml.bind:jaxb-api:2.2.7'
+	jaxb 'javax.activation:activation:1.1.1'
 }
