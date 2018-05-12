@@ -1,4 +1,4 @@
 rootProject.name = 'main'
-include 'server'
 include 'wsdl'
+include 'server'
 

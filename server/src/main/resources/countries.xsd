@@ -17,15 +17,14 @@
 		</xs:complexType>
 	</xs:element>
 
-	<!--
-	<xs:element name="UpdateCountryRequest">
+	<xs:element name="getAllCountriesResponse">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element name="country" type="tns:country"/>
+				<xs:element name="countries" type="tns:country" maxOccurs="unbounded"/>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
-	-->
+
 	<xs:element name="getCountryResponse">
 		<xs:complexType>
 			<xs:sequence>

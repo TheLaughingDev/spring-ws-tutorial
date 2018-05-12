@@ -9,12 +9,21 @@ import org.springframework.ws.server.endpoint.annotation.RequestPayload
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload
 import org.thelaughingdev.soap.server.repository.CountryRepository
 import org.thelaughingdev.wsdl.FindCountryByNameRequest
+import org.thelaughingdev.wsdl.GetAllCountriesResponse
 
 @Endpoint
 open class CountryEndpoint @Autowired constructor(private val countryRepository: CountryRepository) {
 
 	companion object {
 		const val NAMESPACE_URI = "http://thelaughingdev.org/web-services"
+	}
+
+	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "getAllCountries")
+	@ResponsePayload
+	fun getAllCountries(): GetAllCountriesResponse {
+		return GetAllCountriesResponse().apply {
+			countryRepository.findAll().map{it.toDto()}.forEach {countries.add(it)};
+		}
 	}
 
 	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "getCountryRequest")
