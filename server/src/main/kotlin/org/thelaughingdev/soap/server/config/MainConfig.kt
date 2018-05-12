@@ -17,6 +17,9 @@ import javax.servlet.Servlet
 @Configuration
 open class MainConfig: WsConfigurerAdapter() {
 
+	/**
+	 * Setup servlet to listen for SOAP requests on /ws.
+	 */
 	@Bean
 	open fun messageDispatchServlet(context: ApplicationContext): ServletRegistrationBean<Servlet> {
 		val servlet = MessageDispatcherServlet().apply {
@@ -26,9 +29,15 @@ open class MainConfig: WsConfigurerAdapter() {
 		return ServletRegistrationBean(servlet, "/ws/*")
 	}
 
+	/**
+	 * Let Spring know where to fine countries.xsd.
+	 */
 	@Bean
 	open fun countriesSchema(): XsdSchema = SimpleXsdSchema(ClassPathResource("countries.xsd"))
 
+	/**
+	 * Give Spring hints about building the WSDL dynamically.
+	 */
 	@Bean
 	open fun countries(schema: XsdSchema): DefaultWsdl11Definition {
 		return DefaultWsdl11Definition().apply {

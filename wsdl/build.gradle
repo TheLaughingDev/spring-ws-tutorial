@@ -6,6 +6,7 @@ plugins {
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
+// Defines setup for the JAXB plugin. The Java files will be sent to src/main/java.
 jaxb {
 	xsdDir = "server/src/main/resources"
 	episodesDir = "wsdl/schema/episodes"
@@ -14,10 +15,12 @@ jaxb {
 	}
 }
 
+// Delete the java folder contents on a clean. Do not put anything in there you want to keep.
 clean.doFirst {
 	delete "$rootDir/wsdl/src/main/java/org"
 }
 
+// Generate the Java objects before compiling.
 compileJava.dependsOn(xjc)
 
 dependencies {

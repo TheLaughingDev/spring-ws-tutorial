@@ -11,6 +11,9 @@ import org.thelaughingdev.soap.server.repository.CountryRepository
 import org.thelaughingdev.wsdl.FindCountryByNameRequest
 import org.thelaughingdev.wsdl.GetAllCountriesResponse
 
+/**
+ * Defines endpoints web services.
+ */
 @Endpoint
 open class CountryEndpoint @Autowired constructor(private val countryRepository: CountryRepository) {
 
